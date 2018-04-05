@@ -157,8 +157,11 @@ A succesful request returns the XML of the requested report
 
 **FOR LARAVEL SETUP CONFIGURATION:-**
 
-1. composer require mohdnazrul/laravel-cbm
-2. Add this syntax inside config/app.php
+- Do composer require mohdnazrul/laravel-cbm
+```php
+   composer require mohdnazrul/laravel-cbm
+```
+- Add this syntax inside config/app.php
 ```php
    ....
    'providers'=> [
@@ -172,13 +175,11 @@ A succesful request returns the XML of the requested report
       '
     ],
 ``` 
-
-3. Do publish as below
+- Do publish as below
 ```php
 php artisan vendor:publish --tag=cbm 
 ```
-
-4. You can edit the default configuration CBM inside config/cbm.php based your account as below
+- You can edit the default configuration CBM inside config/cbm.php based your account as below
 ```php
 return [
     'serviceUrl'    =>  env('CBM_URL','http://localhost'),
@@ -186,5 +187,11 @@ return [
     'password'      =>  env('CBM_PASSWORD','password')
 ];
 ``` 
+
+
+
+
+
+
 
      
