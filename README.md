@@ -22,7 +22,7 @@ Configuration via the .env file currently allows the following variables to be s
 ```php
 CBM::generateXMLFromArray($data)
 ```
-This function takes an array of options for the RAMCI API and generates the XML code
+This function takes an array of options for the CBM API and generates the XML code
 that can be submitted via the API Call. Example:
 ```php
 // This is for Commercial Format
@@ -78,6 +78,7 @@ that can be submitted via the API Call. Example:
       ]
 
 ``` 
+
 will generate
 **// This is for Commercial Format**
 ```xml
@@ -139,20 +140,20 @@ will generate
 CBM::getReport($requestXML,  $sendXML=true)
 ```
 
-This function tries to retrieve the report data from RAMCI and returns the XML response;
-In case of a connectino error, it returns FALSE,
+This function tries to retrieve the report data from CBM and returns the XML response;
+In case of a connection error, it return,
 
-If the request was succesful but the query resulted in data related errors, the returned array will have the fields:
+If the request was successful but the query resulted in data related errors, the returned array will have the fields:
 
-code  : contains the error code received from RAMCI
-error : contains the error message received from RAMCI
+code  : contains the error code received from CBM
+error : contains the error message received from CBM
 
-A succesful request returns the XML of the requested report
+A successful request returns the XML of the requested report
 
 
 **OPTIONAL PARAMETER $sendXML:**
  
- If this parameter is set to false, the funcitno will return the data as an associative array. 
+ If this parameter is set to false, the function will return the data as an associative array. 
  The XML tag names are the keys of the array, the XML values obviously the data of the array
 
 **FOR LARAVEL SETUP CONFIGURATION:-**
