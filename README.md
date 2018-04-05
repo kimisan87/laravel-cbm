@@ -20,7 +20,7 @@ Configuration via the .env file currently allows the following variables to be s
 ## Available functions
 
 ```php
-RAMCI::generateXMLFromArray($data)
+CBM::generateXMLFromArray($data)
 ```
 This function takes an array of options for the RAMCI API and generates the XML code
 that can be submitted via the API Call. Example:
@@ -51,7 +51,7 @@ that can be submitted via the API Call. Example:
       ]
       
 // This is for Consumer Format
- [
+      [
        'SystemID'          =>  'SCBS',
        'Service'           =>  'SMEDTLRPTS',
        'ReportType'        =>  'CCR-II',
@@ -82,7 +82,7 @@ will generate
 **// This is for Commercial Format**
 ```xml
    <?xml version="1.0"?>
-<Request>
+   <Request>
 	<SystemID>SCBS</SystemID>
 	<Service>SMEDTLRPTS</Service>
 	<ReportType>CRR-II</ReportType>
@@ -94,17 +94,17 @@ will generate
 	<PurposeStdCode>CREREV</PurposeStdCode>
 	<CostCenterStdCode/>
 	<ConsentFlag/>
-	<Subject>
-		<RegNo>X1234</RegNo>
-		<RegName>ABC Sdn Bhd</RegName>
-		<DateBR>11/2/1988</DateBR>
-		<ConstitutionTypeStdCode>24</ConstitutionTypeStdCode>
-		<BusinessCouCodeStdCode/>
-		<BusinessStaCodeStdCode/>
+	   <Subject>
+		   <RegNo>X1234</RegNo>
+		   <RegName>ABC Sdn Bhd</RegName>
+		   <DateBR>11/2/1988</DateBR>
+		   <ConstitutionTypeStdCode>24</ConstitutionTypeStdCode>
+		   <BusinessCouCodeStdCode/>
+		    <BusinessStaCodeStdCode/>
             <EntityCode>4130740</EntityCode>
 		<TradeEntityCode/>
-	</Subject>
-</Request>
+	   </Subject>
+    </Request>
 ```
 **// This is for Consumer Format**
 ```xml
