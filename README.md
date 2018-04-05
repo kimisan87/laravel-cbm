@@ -1,4 +1,4 @@
-# CBM API Package
+# CREDIT BUREAU MALAYSIA - CBM API Package
 
 This lLibrary allows to query the CBM - CREDIT BUREAU MALAYSIA - B2B API for registered users. 
 
