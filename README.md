@@ -172,8 +172,13 @@ A succesful request returns the XML of the requested report
       '
     ],
 ``` 
-3. php artisan vendor:publish --tag=cbm 
-4.  You can edit the default configuration CBM inside config/cbm.php based your account as below
+
+3. Do publish as below
+```php
+php artisan vendor:publish --tag=cbm 
+```
+
+4. You can edit the default configuration CBM inside config/cbm.php based your account as below
 ```php
 return [
     'serviceUrl'    =>  env('CBM_URL','http://localhost'),
