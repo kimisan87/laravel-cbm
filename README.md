@@ -172,7 +172,7 @@ A successful request returns the XML of the requested report
    ],
    'aliases' => [
       .
-      'CBM' => MohdNazrul\CBMLaravel\CBMApiFacade::class,
+      'CBMApi' => MohdNazrul\CBMLaravel\CBMApiFacade::class,
       '
     ],
 ``` 
