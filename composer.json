@@ -1,0 +1,33 @@
+{
+    "name": "mohdnazrul/laravel-cbm",
+    "description": "Library to pull reports from CBM - Credit Bureau Malaysia System",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "illuminate/support": "5.4.*",
+        "phpunit/phpunit": "^7.0.2"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohd Nazrul Bin Mustaffa",
+            "email": "nazrulmustaffa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "MohdNazrul\\CBMLaravel\\": "src",
+            "MohdNazrul\\CBMLaravelTest\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "MohdNazrul\\CBMLaravel\\CBMServiceProvider"
+            ],
+            "aliases": {
+                "CBM": "MohdNazrul\\CBMLaravel\\CBMApiFacade"
+            }
+        }
+    }
+}
