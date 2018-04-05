@@ -17,7 +17,7 @@ class CBMServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__ . '/../config/cbm.php' => config_path('cbm.php'),
-        ], 'ramci');
+        ], 'cbm');
     }
 
     /**
