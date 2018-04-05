@@ -1,6 +1,6 @@
-# RAMCI API Package
+# CBM API Package
 
-This lLibrary allows to query the RMACI B2B API for registered users. 
+This lLibrary allows to query the CBM - CREDIT BUREAU MALAYSIA - B2B API for registered users. 
 
 You need the access details that were provided to you to make any calls to the API.
 For exact parameters in the data array/XML, refer to your offline documentation.
@@ -13,53 +13,130 @@ If you do not know what all this is about, then you probably do not need or want
 
 Configuration via the .env file currently allows the following variables to be set:
 
-- RAMCI\_BASE\_URL : the base URL for the API endpoint WITHOUT the command (report/xml/pdf)
-- RAMCI\_USERNAME : the username to access the API
-- RAMCI\_PASSWORD : the password to ccess the API
-
-###Example:
-if the urls you have to generate the reports are
-- http://api.endpoint/url/report
-- http://api.endpoint/url/xml
-- http://api.endpoint/url/pdf
-
-and your username is demouser with password demoPassword then: 
-
-- RAMCI\_BASE\_URL='http://api.endpoint/url/'
-- RAMCI\_USERNAME=demouser 
-- RAMCI\_PASSWORD=demoPassword
+- CBM\_URL='http://api.endpoint/url/'
+- CBM\_USERNAME=demouser 
+- CBM\_PASSWORD=demoPassword
 
 ## Available functions
 
 ```php
 RAMCI::generateXMLFromArray($data)
 ```
-
 This function takes an array of options for the RAMCI API and generates the XML code
 that can be submitted via the API Call. Example:
 ```php
+// This is for Commercial Format
       [
-       'ProductType'   =>  'CHECK_DATE_COMPANY',
-       'EntityName'    =>  'My Company Name',
-       'EntityId'      =>  '123456789'
+       'SystemID'          =>  'SCBS',
+       'Service'           =>  'My Company Name',
+       'ReportType'        =>  'CCR-II',
+       'MemberID'          =>  '1234567',
+       'UserID'            =>  '1234567',
+       'ReqNo'             =>  '',
+       'SequenceNo'        =>  '001',
+       'ReqDate'           =>  '05/04/2018',
+       'PurposeStdCode'    => 'CREREV',
+       'CostCenterStdCode' => '',
+       'ConsentFlag'       => '',
+       'Subject'           => [
+                                'RegNo'                   => 'X1234',
+                                'RegName'                 => 'ABC Sdn Bhd',
+                                'DateBR'                  => '11/2/1988',
+                                'ConstitutionTypeStdCode' => '24',
+                                'BusinessCouCodeStdCode'  => '',
+                                'BusinessStaCodeStdCode'  => '',
+                                'EntityCode'              => '4130740',
+                                'TradeEntityCode'         => ''
+                             ]
       ]
+      
+// This is for Consumer Format
+ [
+       'SystemID'          =>  'SCBS',
+       'Service'           =>  'SMEDTLRPTS',
+       'ReportType'        =>  'CCR-II',
+       'MemberID'          =>  '1234567',
+       'UserID'            =>  '1234567',
+       'ReqNo'             =>  '',
+       'SequenceNo'        =>  '001',
+       'ReqDate'           =>  '05/04/2018',
+       'PurposeStdCode'    => 'CREREV',
+       'CostCenterStdCode' => '',
+       'ConsentFlag'       => '',
+       'Subject'           => [
+                                'IdNo1'                   => 'IC_NO',
+                                'IdNo2'                   => 'OLD_IC/PASSPORT_NO',
+                                'Name'                    => 'ABU BAKAR',
+                                'Dob'                     => '31/12/1973',
+                                'ConstitutionTypeStdCode' => '011',
+                                'NationalityStdCode'      => '',
+                                'EntityCode'              => '',
+                                'TradeEntityCode'         => '',
+                                'Email'                   => '',
+                                'MobileNo'                => '',
+                             ]
+      ]
+
 ``` 
 will generate
+**// This is for Commercial Format**
 ```xml
-      <?xml version="1.0"?>
-      <xml>
-            <request> 
-                  <ProductType>CHECK_DATE_COMPANY</ProductType>
-                  <EntityName>My Company Name</EntityName>
-                  <EntityId>12356789</EntityId>
-            </request>
-      </xml>
+   <?xml version="1.0"?>
+<Request>
+	<SystemID>SCBS</SystemID>
+	<Service>SMEDTLRPTS</Service>
+	<ReportType>CRR-II</ReportType>
+	<MemberID>1234567</MemberID>
+	<UserID>1234567</UserID>
+	<ReqNo/>
+	<SequenceNo>001</SequenceNo>
+	<ReqDate>05/04/2018</ReqDate>
+	<PurposeStdCode>CREREV</PurposeStdCode>
+	<CostCenterStdCode/>
+	<ConsentFlag/>
+	<Subject>
+		<RegNo>X1234</RegNo>
+		<RegName>ABC Sdn Bhd</RegName>
+		<DateBR>11/2/1988</DateBR>
+		<ConstitutionTypeStdCode>24</ConstitutionTypeStdCode>
+		<BusinessCouCodeStdCode/>
+		<BusinessStaCodeStdCode/>
+            <EntityCode>4130740</EntityCode>
+		<TradeEntityCode/>
+	</Subject>
+</Request>
 ```
-
-
-
+**// This is for Consumer Format**
+```xml
+   <?xml version="1.0"?>
+<Request>
+	<SystemID>SCBS</SystemID>
+	<Service>SMEDTLRPTS</Service>
+	<ReportType>CRR-II</ReportType>
+	<MemberID>1234567</MemberID>
+	<UserID>1234567</UserID>
+	<ReqNo/>
+	<SequenceNo>001</SequenceNo>
+	<ReqDate>05/04/2018</ReqDate>
+	<PurposeStdCode>CREREV</PurposeStdCode>
+	<CostCenterStdCode/>
+	<ConsentFlag/>
+	<Subject>
+		<IdNo1>IC_NO</IdNo1>
+		<IdNo2>OLD_IC/PASSPORT_NO</IdNo2>
+		<Name>ABU BAKAR</Name>
+		<Dob>31/12/1973</Dob>
+		<ConstitutionTypeStdCode>011</ConstitutionTypeStdCode>
+		<NationalityStdCode></NationalityStdCode>
+		<EntityCode></EntityCode>
+		<TradeEntityCode></TradeEntityCode>		
+		<Email></Email>
+		<MobileNo></MobileNo>
+	</Subject>
+</Request>
+```
 ```php
-RAMCI::getReport($requestXML, $command='report', $sendXML=true)
+RAMCI::getReport($requestXML,  $sendXML=true)
 ```
 
 This function tries to retrieve the report data from RAMCI and returns the XML response;
@@ -72,14 +149,27 @@ error : contains the error message received from RAMCI
 
 A succesful request returns the XML of the requested report
 
-**OPTIONAL PARAMETER $command:**
-
-By default the request calls the "report" endpoint you can change to the 'xml' endpoint by sending
-the optional parameter $command with a value of 'xml' - 'pdf' is not supported by this function
 
 **OPTIONAL PARAMETER $sendXML:**
  
  If this parameter is set to false, the funcitno will return the data as an associative array. 
  The XML tag names are the keys of the array, the XML values obviously the data of the array
+
+**FOR LARAVEL SETUP CONFIGURATION:-**
+
+1. composer require mohdnazrul/laravel-cbm
+2. Add this syntax inside config/app.php
+   ....
+   'providers'=> [
+     .
+     MohdNazrul\CBMLaravel\CBMServiceProvider::class,
+     .
+   ],
+   'aliases' => [
+      .
+      'CBM' => MohdNazrul\CBMLaravel\CBMApiFacade::class,
+      '
+    ],
+
 
      
