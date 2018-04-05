@@ -159,6 +159,7 @@ A succesful request returns the XML of the requested report
 
 1. composer require mohdnazrul/laravel-cbm
 2. Add this syntax inside config/app.php
+```php
    ....
    'providers'=> [
      .
@@ -170,6 +171,6 @@ A succesful request returns the XML of the requested report
       'CBM' => MohdNazrul\CBMLaravel\CBMApiFacade::class,
       '
     ],
-
+``` 
 
      
