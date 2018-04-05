@@ -136,7 +136,7 @@ will generate
 </Request>
 ```
 ```php
-RAMCI::getReport($requestXML,  $sendXML=true)
+CBM::getReport($requestXML,  $sendXML=true)
 ```
 
 This function tries to retrieve the report data from RAMCI and returns the XML response;
