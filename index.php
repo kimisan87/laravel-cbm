@@ -22,7 +22,7 @@ try {
         'Subject' => [
             'RegNo' => '175481T',
             'RegName' => 'HBM MECHANICAL SERVICES SDN. BHD.',
-            'DateBR' => '11/2/1988',
+            'DateBR' => '11/02/1988',
             'ConstitutionTypeStdCode' => '24',
             'BusinessCouCodeStdCode' => '',
             'BusinessStaCodeStdCode' => '',
@@ -33,14 +33,16 @@ try {
 
     $xml = $service->generateXMLFromArray($dataArray);
 
-    $res = $service->getReport($xml, true);
+    $res = $service->getReport($xml, false);
 
 
-     echo '<pre>'. htmlentities($xml).'</pre>';
+//     echo '<pre>'. htmlentities($xml).'</pre>';
 
 //    $res = $service->getReport($xml, true);
 
-    echo '<pre>' . htmlentities($res) . '</pre>';
+//   var_dump( $res );
+
+   print_r($res);
 
 } catch (Exception $e) {
     print_r($e->getMessage());

@@ -47,6 +47,19 @@ class CBMApi
                 }
 
             }
+
+            if($key == 'InterestParties'){
+                $xmlString .= "<$key>";
+                foreach ($value as $key3 => $innerValue2){
+                    if(!empty($innerValue)) {
+                        $xmlString .= "<$key3>$innerValue2</$key3>";
+                    } else {
+                        $xmlString .= "<$key3/>";
+                    }
+                }
+                $xmlString .= "</$key>";
+            }
+
         }
         $xmlString      .=  '</Request>';
 
@@ -85,11 +98,11 @@ class CBMApi
         {
             return $xml->asXML();
         }
-        $json       =   json_encode($xml);
-        $reportData =   ($sendXML) ? $json : json_decode($json,true);
-
+        $json = json_encode($xml);
+        $reportData = json_decode($json,TRUE);
         return $reportData;
 
     }
+
 
 }

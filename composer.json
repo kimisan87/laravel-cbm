@@ -3,7 +3,9 @@
     "description": "Library to pull reports from CBM - Credit Bureau Malaysia System",
     "type": "library",
     "require": {
-        "guzzlehttp/guzzle": "^6.3",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "require-dev": {
         "illuminate/support": "5.4.*",
         "phpunit/phpunit": "^7.0.2"
     },
