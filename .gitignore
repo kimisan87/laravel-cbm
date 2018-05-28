@@ -21,3 +21,6 @@ Homestead.json
 
 .idea/
 index.php
+certificate.crt
+client.pem
+private.key

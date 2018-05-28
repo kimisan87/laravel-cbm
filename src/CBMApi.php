@@ -81,23 +81,42 @@ class CBMApi
         return $dom->saveXML();
     }
 
-    public function getReport($requestXML, $sendXML = true)
+    public function getReport($requestXML, $sendXML = true, $production = false, $path_cert = null, $path_key = null, $password = null)
     {
         $client = new Client();
 
-        $response = $client->post(
-            $this->serviceURL,
-            [
-                'auth' => [$this->username, $this->password],
-                'headers' => [
-                    'Content-Type' => 'application/xml',
-                    'Accept' => 'application/xml',
-                ],
-                'verify' => false,
-                'body' => $requestXML,
-                'debug' => false
-            ]
-        );
+        if($production){
+            $response = $client->post(
+                $this->serviceURL,
+                [
+                    'auth' => [$this->username, $this->password],
+                    'cert' => [$path_cert, $password],
+                    'ssl_key'=> [$path_key, $password],
+                    'headers' => [
+                        'Content-Type' => 'application/xml',
+                        'Accept' => 'application/xml',
+                    ],
+                    'verify' => false,
+                    'body' => $requestXML,
+                    'debug' => false
+                ]
+            );
+        } else {
+            $response = $client->post(
+                $this->serviceURL,
+                [
+                    'auth' => [$this->username, $this->password],
+                    'headers' => [
+                        'Content-Type' => 'application/xml',
+                        'Accept' => 'application/xml',
+                    ],
+                    'verify' => false,
+                    'body' => $requestXML,
+                    'debug' => false
+                ]
+            );
+        }
+
 
         if ($response->getStatusCode() != 200) {
             return false;
